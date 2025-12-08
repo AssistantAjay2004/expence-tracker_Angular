@@ -8,7 +8,6 @@ import { BudgetPlannerRoutingModule } from './budget-planner-routing.module';
   imports: [
     CommonModule,
     BudgetPlannerRoutingModule,
-   
-  ]
+  ],
 })
 export class BudgetPlannerModule { }
