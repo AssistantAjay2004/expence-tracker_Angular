@@ -9,9 +9,29 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   templateUrl: './income.component.html',
   styleUrl: './income.component.scss'
 })
+
 export class IncomeComponent {
   incomeForm:any;
-  constructor(public fb:FormBuilder){}
+  selectedMonth:any;
+  januaryIncome: any[] = [
+     { source: 'salary', amount: 5000, investments: '401(k)' },
+     { source: 'Freelancing', amount: 1000, investments: 'Stocks' },
+  ];
+  februaryIncome: any[] = [
+    { source: 'Salary', amount: 5500, investments: '401(k)' },
+    { source: 'Rental Income', amount: 700, investments: 'Real Estate' },
+  ];
+  marchIncome: any[] = [
+    { source: 'Salary', amount: 5200, investments: '401(k)' },
+    { source: 'Freelancing', amount: 1200, investments: 'Stocks' },
+    { source: 'Rental Income', amount: 600, investments: 'Real Estate' }
+  ];
+ monthSelected:boolean = false;
+  constructor(public fb:FormBuilder){
+    const currentDate = new Date();
+    this.selectedMonth = currentDate.toLocaleString('default', { month: 'long' });
+  }
+
   ngOnInit():void{
     this.incomeForm = this.fb.group({
       month: ['', Validators.required],
@@ -20,10 +40,52 @@ export class IncomeComponent {
       investments: ['', Validators.required]
     })
   }
-  onChange(event:any){
 
+  onChange(event:any){
+    this.selectedMonth = event.target.value
+    this.getFilteredIncome();
   }
+
+   calculateTotalIncome(month: string): number {
+    let totalIncome = 0;
+    for(const income of this.getIncomeForMonth(month)){
+      totalIncome += income.amount;
+    }
+     return totalIncome;
+   }
+
+   getIncomeForMonth(month: string): any{
+     switch(month){
+      case 'January':
+        return this.januaryIncome;
+      case 'February':
+        return this.februaryIncome;
+      case 'March':
+        return this.marchIncome;
+      default:
+        return [];
+     }
+   }
+  getFilteredIncome(){
+     let filteredIncome: any[] = [];
+     switch (this.selectedMonth) {
+      case 'January' :
+        filteredIncome = [...this.januaryIncome];
+        break;
+      case 'February' :
+        filteredIncome = [...this.februaryIncome];
+        break;
+      case 'March' :
+        filteredIncome = [...this.marchIncome];
+        break;
+      default:
+        break;
+     }
+     return filteredIncome;
+  }
+
   onSubmit(){
 
   }
+
 }
