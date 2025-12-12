@@ -4,17 +4,22 @@ import { LoginComponent } from './login/login.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomeComponent } from './income/income.component';
+import { ExpenseComponent } from './expense/expense.component';
+// import { TodoComponent } from './todo/todo.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'login', pathMatch:'full'},
   {path:'login', component:LoginComponent},
   {path:'side-nav', component:SideNavComponent},
   {path:'dashboard', component:DashboardComponent},
-  {path:'income', component:IncomeComponent}
+  {path:'income', component:IncomeComponent},
+  {path:'expense', component:ExpenseComponent},
+  // {path:'todo', component:TodoComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+
 export class BudgetPlannerRoutingModule { }
