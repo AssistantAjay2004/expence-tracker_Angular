@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from "@angular/forms";
   imports: [
     CommonModule,
     BudgetPlannerRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
 })
 export class BudgetPlannerModule { }
